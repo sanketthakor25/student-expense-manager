@@ -1,72 +1,68 @@
-
 def student_expenses():
-    print("\n=====Student Expences=====")
+    print("\n===== Student Expenses =====\n")
     
     expenses = []
     while True:
-    
-        amount = int(input("Enter expenses:\t"))
-        category = input("Enter Category:\t")
-        description = input("Enter description:\t")
-        expenses.append([amount,category,description])
-    
-        print("Expenses Added!")
-        print("\n===Expenses Detail===\n")
-    
-        print("Amount:\t",amount)
-        print("Category:\t",category)
-        print("Description:\t",description)
-    
-        # print("Do you want to add another expenses?")
-        choice = input("\nAdd another expenses? (yes/no): \t").strip().lower()
-    
-    
-        if choice =="no":
-            break
+        try:
+            amount = int(input("Enter expenses amount:\t"))
+        except ValueError:
+            print("Invalid amount! Please enter a valid number.")
+            continue
+            
+        category = input("Enter Category:\t").strip()
+        description = input("Enter description:\t").strip()
         
+        expenses.append([amount, category, description])
+    
+        print("\nExpense Added Successfully!")
+        print("---------------------------")
+        print("Amount:\t\t", amount)
+        print("Category:\t", category)
+        print("Description:\t", description)
+        print("---------------------------")
+    
+        choice = input("\nAdd another expense? (yes/no):\t").strip().lower()
+    
+        if choice == "no":
+            break
         elif choice == "yes":
             continue
-        
         else:
-            print("Invalid choice!!!")
+            print("Invalid choice! Please type 'yes' or 'no'.")
             
-        print("\n===All Expenses===")    
+    # Display all recorded expenses before showing totals
+    print("\n===== All Expenses Logged =====")
+    for expense in expenses:
+        print("Amount:\t\t", expense[0])
+        print("Category:\t", expense[1])
+        print("Description:\t", expense[2])
+        print("-----------------------------")
         
-        for expense in expenses:
-            print("Amount:", expense[0])
-            print("Category:", expense[1])
-            print("Description:", expense[2])
-            print("\n-------------------\n")
     total(expenses)     
     category_total(expenses) 
           
 def total(total_expenses):
     total_amount = 0
-    
     for expense in total_expenses:
-        total_amount = total_amount + expense[0]
+        total_amount += expense[0]
         
-    print("Total expenses:",total_amount)  
+    print("\nTotal Expenses:", total_amount)  
     
 def category_total(expenses):   
     category_expenses = {}
     
     for expense in expenses:
-        
         category = expense[1]
         amount = expense[0]
         
         if category in category_expenses:
             category_expenses[category] += amount
         else:
-             category_expenses[category] = amount
+            category_expenses[category] = amount
              
     print("\n===== Category Wise Expenses =====\n")         
-            
     for category, amount in category_expenses.items():
-        print(category, ":" , amount)
-                
+        print(f"{category}: {amount}")
 
-
-
+# Run the program
 student_expenses()
