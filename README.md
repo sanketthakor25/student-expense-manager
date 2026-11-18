@@ -1,4 +1,4 @@
-# Student Expense Manager😜
+# Student Expense Manager
 
 A beginner-friendly Python console project for recording student
 expenses, viewing saved entries, calculating total spending, and
